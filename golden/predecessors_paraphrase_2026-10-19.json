@@ -1,0 +1,82 @@
+{
+ "niulai_offline_path": {
+  "L0": 0.9466,
+  "L1": 0.9259,
+  "L2": 0.8914,
+  "L3": 0.8765,
+  "L4": 0.8269
+ },
+ "ttsc": {
+  "L1": {
+   "recommended_technical_score": 0.708333,
+   "hit_rate_at_10": 0.83,
+   "mrr": 0.502444,
+   "mttc": 3.87,
+   "seconds": 79.4
+  },
+  "L2": {
+   "recommended_technical_score": 0.688529,
+   "hit_rate_at_10": 0.81,
+   "mrr": 0.479431,
+   "mttc": 4.015,
+   "seconds": 84.2
+  },
+  "L3": {
+   "recommended_technical_score": 0.691377,
+   "hit_rate_at_10": 0.815,
+   "mrr": 0.480258,
+   "mttc": 4.01,
+   "seconds": 83.0
+  },
+  "L4": {
+   "recommended_technical_score": 0.705521,
+   "hit_rate_at_10": 0.825,
+   "mrr": 0.507069,
+   "mttc": 3.955,
+   "seconds": 85.8
+  }
+ },
+ "fusion_prototype": {
+  "L0": {
+   "recommended_technical_score": 0.9805,
+   "hit_rate_at_10": 1.0,
+   "mrr": 1.0,
+   "mttc": 1.975,
+   "note": "all 395 turns pass-through, bit-identical"
+  },
+  "L1": {
+   "recommended_technical_score": 0.9724,
+   "canonicalised_exact": "398/410"
+  },
+  "L2": {
+   "recommended_technical_score": 0.754808,
+   "hit_rate_at_10": 0.835,
+   "mrr": 0.629694,
+   "mttc": 3.58,
+   "passthrough": 0,
+   "canonicalised": 602,
+   "unparsed": 81,
+   "seconds": 82.8
+  },
+  "L3": {
+   "recommended_technical_score": 0.741346,
+   "hit_rate_at_10": 0.835,
+   "mrr": 0.585819,
+   "mttc": 3.595,
+   "passthrough": 0,
+   "canonicalised": 497,
+   "unparsed": 189,
+   "seconds": 87.9
+  },
+  "L4": {
+   "recommended_technical_score": 0.676692,
+   "hit_rate_at_10": 0.815,
+   "mrr": 0.432639,
+   "mttc": 4.03,
+   "passthrough": 0,
+   "canonicalised": 458,
+   "unparsed": 311,
+   "seconds": 86.9
+  }
+ }
+}

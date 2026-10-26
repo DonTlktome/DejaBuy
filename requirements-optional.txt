@@ -1,0 +1,7 @@
+# The default path (evaluation, memory, REST demo) needs only the Python standard library.
+# These are for optional features:
+numpy            # dense retrieval route (USE_DENSE=1), scripts/build_dense.py, scripts/train_memory.py
+onnxruntime      # dense retrieval route, INT8 encoder
+onnx             # scripts/build_dense.py (quantisation step)
+tokenizers       # dense retrieval route
+scipy            # scripts/train_memory.py (learning the memory prior)

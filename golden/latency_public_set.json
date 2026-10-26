@@ -1,0 +1,22 @@
+{
+ "set": "public_set",
+ "level": "L0",
+ "dense": false,
+ "memory_store": true,
+ "turns": 388,
+ "build_seconds": 19.4,
+ "rss_mb_after_build": 601,
+ "peak_rss_mb": 756,
+ "all": {
+  "p50": 47.9,
+  "p95": 130.4,
+  "p99": 174.5,
+  "max": 233.5,
+  "mean": 55.6
+ },
+ "strict": {
+  "turns": 388,
+  "p50": 47.9,
+  "p95": 130.4
+ }
+}

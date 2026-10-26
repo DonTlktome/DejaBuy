@@ -1,0 +1,146 @@
+{
+ "split": "test",
+ "n": 2000,
+ "conditions": {
+  "cold": {
+   "n": 2000,
+   "score": 0.9771,
+   "hit": 0.999,
+   "mrr": 0.9931,
+   "mttc": 2.015,
+   "first_turn": 0.3425
+  },
+  "memory": {
+   "n": 2000,
+   "score": 0.9772,
+   "hit": 0.9985,
+   "mrr": 0.9927,
+   "mttc": 1.994,
+   "first_turn": 0.355
+  },
+  "shuffled": {
+   "n": 2000,
+   "score": 0.9768,
+   "hit": 0.999,
+   "mrr": 0.9926,
+   "mttc": 2.026,
+   "first_turn": 0.3355
+  }
+ },
+ "strata": {
+  "cold": {
+   "other": {
+    "n": 1680,
+    "score": 0.9777,
+    "hit": 0.9994,
+    "mrr": 0.9939,
+    "mttc": 2.009,
+    "first_turn": 0.3476
+   },
+   "same_category": {
+    "n": 193,
+    "score": 0.9728,
+    "hit": 0.9948,
+    "mrr": 0.9853,
+    "mttc": 2.01,
+    "first_turn": 0.3005
+   },
+   "same_store": {
+    "n": 127,
+    "score": 0.9759,
+    "hit": 1.0,
+    "mrr": 0.9931,
+    "mttc": 2.102,
+    "first_turn": 0.3386
+   }
+  },
+  "memory": {
+   "other": {
+    "n": 1680,
+    "score": 0.9773,
+    "hit": 0.9988,
+    "mrr": 0.9933,
+    "mttc": 2.004,
+    "first_turn": 0.3506
+   },
+   "same_category": {
+    "n": 193,
+    "score": 0.9719,
+    "hit": 0.9948,
+    "mrr": 0.9832,
+    "mttc": 2.021,
+    "first_turn": 0.2746
+   },
+   "same_store": {
+    "n": 127,
+    "score": 0.9833,
+    "hit": 1.0,
+    "mrr": 1.0,
+    "mttc": 1.835,
+    "first_turn": 0.5354
+   }
+  },
+  "shuffled": {
+   "other": {
+    "n": 1680,
+    "score": 0.9774,
+    "hit": 0.9994,
+    "mrr": 0.9934,
+    "mttc": 2.017,
+    "first_turn": 0.3423
+   },
+   "same_category": {
+    "n": 193,
+    "score": 0.9727,
+    "hit": 0.9948,
+    "mrr": 0.9853,
+    "mttc": 2.016,
+    "first_turn": 0.2953
+   },
+   "same_store": {
+    "n": 127,
+    "score": 0.9748,
+    "hit": 1.0,
+    "mrr": 0.9931,
+    "mttc": 2.157,
+    "first_turn": 0.3071
+   }
+  }
+ },
+ "paired": {
+  "memory-cold": {
+   "rr": [
+    -0.0003,
+    -0.002,
+    0.0013
+   ],
+   "turns": [
+    -0.016,
+    -0.034,
+    0.0015
+   ],
+   "session_score": [
+    -0.0,
+    -0.0008,
+    0.0006
+   ]
+  },
+  "memory-shuffled": {
+   "rr": [
+    0.0001,
+    -0.0013,
+    0.0017
+   ],
+   "turns": [
+    -0.0265,
+    -0.045,
+    -0.008
+   ],
+   "session_score": [
+    0.0003,
+    -0.0005,
+    0.001
+   ]
+  }
+ }
+}

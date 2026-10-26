@@ -1,0 +1,24 @@
+{
+ "machine": "Windows AMD64, 20 cpu, python 3.14.3",
+ "set": "public_set",
+ "level": "L0",
+ "dense": false,
+ "memory_store": true,
+ "turns": 388,
+ "build_seconds": 10.1,
+ "rss_mb_after_build": null,
+ "peak_rss_mb": null,
+ "all": {
+  "p50": 22.6,
+  "p95": 65.2,
+  "p99": 77.7,
+  "max": 88.7,
+  "mean": 27.3
+ },
+ "strict": {
+  "turns": 388,
+  "p50": 22.6,
+  "p95": 65.2
+ },
+ "note": "Bucky's desktop, 2026-10-20; memory counters not captured on this run (fixed in bench/latency.py afterwards)"
+}

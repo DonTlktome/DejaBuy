@@ -1,0 +1,109 @@
+{
+ "dataset": "data/public_set.jsonl",
+ "rows": [
+  {
+   "level": "L0",
+   "dense": false,
+   "score": 0.9812,
+   "hit": 1.0,
+   "mrr": 1.0,
+   "mttc": 1.94,
+   "pool_recall_turn1": 0.555,
+   "pool_recall_all_calls": 0.7448,
+   "sessions_target_only_from_dense": 0,
+   "mean_dense_added": 0,
+   "seconds": 21.8
+  },
+  {
+   "level": "L0",
+   "dense": true,
+   "score": 0.9812,
+   "hit": 1.0,
+   "mrr": 1.0,
+   "mttc": 1.94,
+   "pool_recall_turn1": 0.675,
+   "pool_recall_all_calls": 0.8119,
+   "sessions_target_only_from_dense": 24,
+   "mean_dense_added": 73.0,
+   "seconds": 52.1
+  },
+  {
+   "level": "L2",
+   "dense": false,
+   "score": 0.942491,
+   "hit": 0.985,
+   "mrr": 0.904304,
+   "mttc": 2.065,
+   "pool_recall_turn1": 0.56,
+   "pool_recall_all_calls": 0.6805,
+   "sessions_target_only_from_dense": 0,
+   "mean_dense_added": 0,
+   "seconds": 33.2
+  },
+  {
+   "level": "L2",
+   "dense": true,
+   "score": 0.944416,
+   "hit": 0.99,
+   "mrr": 0.899054,
+   "mttc": 2.015,
+   "pool_recall_turn1": 0.665,
+   "pool_recall_all_calls": 0.7706,
+   "sessions_target_only_from_dense": 23,
+   "mean_dense_added": 79.8,
+   "seconds": 71.1
+  },
+  {
+   "level": "L3",
+   "dense": false,
+   "score": 0.932229,
+   "hit": 0.98,
+   "mrr": 0.880762,
+   "mttc": 2.1,
+   "pool_recall_turn1": 0.555,
+   "pool_recall_all_calls": 0.6611,
+   "sessions_target_only_from_dense": 0,
+   "mean_dense_added": 0,
+   "seconds": 34.2
+  },
+  {
+   "level": "L3",
+   "dense": true,
+   "score": 0.934104,
+   "hit": 0.985,
+   "mrr": 0.875679,
+   "mttc": 2.055,
+   "pool_recall_turn1": 0.665,
+   "pool_recall_all_calls": 0.7525,
+   "sessions_target_only_from_dense": 25,
+   "mean_dense_added": 80.7,
+   "seconds": 68.2
+  },
+  {
+   "level": "L4",
+   "dense": false,
+   "score": 0.948664,
+   "hit": 0.99,
+   "mrr": 0.920548,
+   "mttc": 2.125,
+   "pool_recall_turn1": 0.515,
+   "pool_recall_all_calls": 0.6478,
+   "sessions_target_only_from_dense": 0,
+   "mean_dense_added": 0,
+   "seconds": 33.9
+  },
+  {
+   "level": "L4",
+   "dense": true,
+   "score": 0.948403,
+   "hit": 0.99,
+   "mrr": 0.919345,
+   "mttc": 2.12,
+   "pool_recall_turn1": 0.635,
+   "pool_recall_all_calls": 0.7322,
+   "sessions_target_only_from_dense": 30,
+   "mean_dense_added": 82.3,
+   "seconds": 72.4
+  }
+ ]
+}

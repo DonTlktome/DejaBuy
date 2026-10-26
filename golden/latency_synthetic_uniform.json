@@ -1,0 +1,22 @@
+{
+ "set": "synthetic/uniform",
+ "level": "L0",
+ "dense": false,
+ "memory_store": true,
+ "turns": 2929,
+ "build_seconds": 17.5,
+ "rss_mb_after_build": 600,
+ "peak_rss_mb": 768,
+ "all": {
+  "p50": 55.3,
+  "p95": 124.6,
+  "p99": 163.3,
+  "max": 377.9,
+  "mean": 60.4
+ },
+ "strict": {
+  "turns": 2929,
+  "p50": 55.3,
+  "p95": 124.6
+ }
+}

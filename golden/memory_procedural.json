@@ -1,0 +1,37 @@
+{
+ "n": 400,
+ "results": {
+  "session-only": {
+   "closed": {
+    "n": 196,
+    "score": 0.9668,
+    "hit": 1.0,
+    "mrr": 0.9867,
+    "mttc": 2.459
+   },
+   "plain": {
+    "n": 204,
+    "score": 0.9785,
+    "hit": 1.0,
+    "mrr": 0.9875,
+    "mttc": 1.887
+   }
+  },
+  "procedural": {
+   "closed": {
+    "n": 196,
+    "score": 0.9732,
+    "hit": 1.0,
+    "mrr": 0.9868,
+    "mttc": 2.143
+   },
+   "plain": {
+    "n": 204,
+    "score": 0.9785,
+    "hit": 1.0,
+    "mrr": 0.9875,
+    "mttc": 1.887
+   }
+  }
+ }
+}

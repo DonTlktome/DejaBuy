@@ -1,0 +1,40 @@
+{
+ "default": {
+  "hit_rate_at_10": 0.98,
+  "mrr": 0.881,
+  "mttc": 2.1,
+  "recommended_technical_score": 0.9322,
+  "env": {},
+  "what": "full system"
+ },
+ "no_mirror": {
+  "hit_rate_at_10": 0.98,
+  "mrr": 0.876,
+  "mttc": 2.1,
+  "recommended_technical_score": 0.9307,
+  "env": {
+   "MIRROR_BONUS": "0"
+  },
+  "what": "no intent-card consistency bonus"
+ },
+ "no_phrase_recall": {
+  "hit_rate_at_10": 0.98,
+  "mrr": 0.881,
+  "mttc": 2.1,
+  "recommended_technical_score": 0.9322,
+  "env": {
+   "PHRASE_RECALL": "0"
+  },
+  "what": "no per-constraint phrase recall route"
+ },
+ "no_popularity": {
+  "hit_rate_at_10": 0.955,
+  "mrr": 0.822,
+  "mttc": 2.4,
+  "recommended_technical_score": 0.8961,
+  "env": {
+   "POP_WEIGHT": "0"
+  },
+  "what": "no review-volume prior"
+ }
+}

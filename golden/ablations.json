@@ -1,0 +1,110 @@
+{
+ "default": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 1.0,
+  "mttc": 1.94,
+  "recommended_technical_score": 0.9812,
+  "env": {},
+  "what": "full system",
+  "seconds": 45
+ },
+ "planner_fixed": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 0.884472,
+  "mttc": 1.935,
+  "recommended_technical_score": 0.946642,
+  "env": {
+   "PLANNER": "fixed"
+  },
+  "what": "no environment model / expected-utility planner (week-1 policy)",
+  "seconds": 42
+ },
+ "width_product": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 0.730554,
+  "mttc": 1.475,
+  "recommended_technical_score": 0.909666,
+  "env": {
+   "WIDTH_MODE": "product"
+  },
+  "what": "always show the 10 most likely (no show-vs-defer)",
+  "seconds": 36
+ },
+ "belief_t0.5": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 1.0,
+  "mttc": 1.945,
+  "recommended_technical_score": 0.9811,
+  "env": {
+   "BELIEF_TEMPERATURE": "0.5"
+  },
+  "what": "sharper belief over the support set",
+  "seconds": 45
+ },
+ "belief_t2": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 1.0,
+  "mttc": 1.94,
+  "recommended_technical_score": 0.9812,
+  "env": {
+   "BELIEF_TEMPERATURE": "2.0"
+  },
+  "what": "flatter belief over the support set",
+  "seconds": 44
+ },
+ "no_popularity": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 0.995833,
+  "mttc": 2.055,
+  "recommended_technical_score": 0.97765,
+  "env": {
+   "POP_WEIGHT": "0"
+  },
+  "what": "no review-volume prior",
+  "seconds": 46
+ },
+ "no_has_price": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 1.0,
+  "mttc": 1.97,
+  "recommended_technical_score": 0.9806,
+  "env": {
+   "HAS_PRICE_WEIGHT": "0"
+  },
+  "what": "no listed-price prior",
+  "seconds": 44
+ },
+ "no_mirror": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 1.0,
+  "mttc": 1.94,
+  "recommended_technical_score": 0.9812,
+  "env": {
+   "MIRROR_BONUS": "0"
+  },
+  "what": "no intent-card consistency bonus",
+  "seconds": 47
+ },
+ "no_phrase_recall": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 1.0,
+  "mttc": 1.94,
+  "recommended_technical_score": 0.9812,
+  "env": {
+   "PHRASE_RECALL": "0"
+  },
+  "what": "no per-constraint phrase recall route",
+  "seconds": 45
+ },
+ "plan_top_50": {
+  "hit_rate_at_10": 1.0,
+  "mrr": 1.0,
+  "mttc": 1.945,
+  "recommended_technical_score": 0.9811,
+  "env": {
+   "PLAN_TOP": "50"
+  },
+  "what": "lookahead pruned to the top 50 candidates",
+  "seconds": 43
+ }
+}

@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DejaBuy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #e6eaf0;        /* chambray */
+    --tag: #ffffff;
+    --ink: #1c2650;          /* denim */
+    --ink-soft: #5a6a9a;     /* faded indigo */
+    --rule: #c9d0dc;
+    --thread: #c98a12;       /* topstitch gold: used only for memory */
+    --thread-soft: #f6ead0;
+    --ok: #2f6b4f;
+    --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--paper); color: var(--ink); font-family: var(--font);
+    font-size: 15px; line-height: 1.45; font-variation-settings: "wdth" 100;
+  }
+  button, input, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  /* ---------- top bar ---------- */
+  header {
+    display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap;
+    padding: 18px 28px 14px; border-bottom: 1px solid var(--rule);
+  }
+  .wordmark {
+    font-size: 30px; font-weight: 800; letter-spacing: -0.01em; margin: 0;
+    font-variation-settings: "wdth" 125;
+  }
+  .tagline { color: var(--ink-soft); margin: 0; font-size: 14px; }
+  header .spacer { flex: 1; }
+  .switch { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+  .switch input { appearance: none; width: 38px; height: 22px; border-radius: 11px; background: var(--rule);
+                  position: relative; cursor: pointer; transition: background .15s; margin: 0; }
+  .switch input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px;
+                         border-radius: 50%; background: #fff; transition: transform .15s; }
+  .switch input:checked { background: var(--thread); }
+  .switch input:checked::after { transform: translateX(16px); }
+
+  /* ---------- three zones ---------- */
+  main {
+    display: grid; grid-template-columns: minmax(300px, 28%) 1fr minmax(300px, 27%);
+    height: calc(100vh - 66px); min-height: 640px;
+  }
+  .zone { overflow-y: auto; padding: 20px 24px; }
+  .zone h2 { font-size: 15px; font-weight: 650; margin: 0 0 12px; font-variation-settings: "wdth" 112; }
+  .zone h2 small { font-weight: 400; color: var(--ink-soft); font-variation-settings: "wdth" 100; }
+
+  /* left: who + conversation */
+  #left { border-right: 1px solid var(--rule); display: flex; flex-direction: column; padding-bottom: 0; }
+  .picker { display: grid; gap: 6px; font-weight: 650; font-variation-settings: "wdth" 112; }
+  .picker select { width: 100%; font-weight: 500; font-variation-settings: "wdth" 100; padding: 9px 12px; border-radius: 8px;
+                   border: 1px solid var(--rule); background: var(--tag); }
+  .picker select.returning { border: 2px dashed var(--thread); padding: 8px 11px; }
+  .detail { margin: 6px 0 14px; color: var(--ink-soft); font-size: 13.5px; min-height: 1.4em; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .btn {
+    border: 1px solid var(--ink); background: var(--ink); color: #fff; border-radius: 999px;
+    padding: 7px 14px; cursor: pointer; font-weight: 550;
+  }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn:disabled { opacity: .45; cursor: default; }
+
+  .chat { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-bottom: 12px; }
+  .msg { max-width: 92%; padding: 9px 12px; border-radius: 12px; }
+  .msg.user { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 3px; }
+  .msg.agent { align-self: flex-start; background: var(--tag); border-bottom-left-radius: 3px; }
+  .msg .meta { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+  .msg.user .meta { color: #c3cbe3; }
+  .outcome { align-self: stretch; border-radius: 10px; padding: 10px 12px; background: var(--tag);
+             border-left: 4px solid var(--ok); }
+  .outcome.miss { border-left-color: #a33; }
+  .composer { display: flex; gap: 8px; padding: 12px 0 18px; border-top: 1px solid var(--rule); background: var(--paper); }
+  .composer input { flex: 1; border: 1px solid var(--rule); border-radius: 999px; padding: 9px 14px; background: var(--tag); }
+  .hint { color: var(--ink-soft); font-size: 13px; margin: 0 0 10px; }
+
+  /* middle: shortlist of hang tags */
+  .shortlist { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+  .tagcard {
+    position: relative; background: var(--tag); border-radius: 6px 14px 14px 6px;
+    padding: 12px 14px 12px 34px; display: grid; gap: 6px; min-height: 132px;
+  }
+  .tagcard::before { /* the eyelet of a hang tag */
+    content: ""; position: absolute; left: 12px; top: 16px; width: 9px; height: 9px; border-radius: 50%;
+    border: 2px solid var(--rule); background: var(--paper);
+  }
+  .tagcard .rank { position: absolute; left: 11px; top: 36px; font-size: 13px; font-weight: 650; color: var(--ink-soft);
+                   font-feature-settings: "tnum"; }
+  .tagcard .title { font-weight: 550; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical; overflow: hidden; }
+  .tagcard .store { font-size: 13px; color: var(--ink-soft); }
+  .tagcard .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .price { font-weight: 650; font-feature-settings: "tnum"; font-variation-settings: "wdth" 88; }
+  .belief { height: 4px; background: var(--paper); border-radius: 2px; overflow: hidden; }
+  .belief i { display: block; height: 100%; background: var(--ink-soft); }
+  .tagcard.remembered { box-shadow: inset 0 0 0 2px var(--tag), inset 0 0 0 3.5px var(--thread); }
+  .tagcard .why { font-size: 12.5px; color: #8a6210; }
+  .tagcard.target { outline: 3px solid var(--ok); }
+  .buy { border: 1px solid var(--rule); background: transparent; border-radius: 999px; padding: 3px 10px;
+         font-size: 13px; cursor: pointer; }
+  .buy:hover { border-color: var(--ink); }
+  .empty { color: var(--ink-soft); padding: 40px 0; max-width: 46ch; }
+
+  /* right: the agent's reasoning, on denim */
+  #right { background: var(--ink); color: #e9ecf6; }
+  #right h2 { color: #fff; }
+  #right h2 small, #right .soft { color: #a9b3d4; }
+  .block { margin-bottom: 22px; }
+  .big { font-size: 34px; font-weight: 700; line-height: 1; font-variation-settings: "wdth" 80;
+         font-feature-settings: "tnum"; }
+  .bars { display: grid; gap: 5px; }
+  .bar { display: grid; grid-template-columns: 74px 1fr 46px; align-items: center; gap: 8px; font-size: 13px; }
+  .bar .track { height: 8px; background: rgba(255,255,255,.12); border-radius: 4px; overflow: hidden; }
+  .bar .track i { display: block; height: 100%; background: #9fb0e0; }
+  .bar.chosen { color: #fff; font-weight: 650; }
+  .bar.chosen .track i { background: #fff; }
+  .bar .v { text-align: right; font-feature-settings: "tnum"; color: #a9b3d4; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 2px 9px; font-size: 13px; }
+  .chip.hard { background: rgba(255,255,255,.14); }
+  .memory { border: 2px dashed var(--thread); border-radius: 10px; padding: 12px 14px; }
+  .memory h2 { color: #f3cf86 !important; }
+  .memory dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13.5px; }
+  .memory dt { color: #a9b3d4; }
+  .memory dd { margin: 0; }
+  .memory.off { border-color: rgba(255,255,255,.2); color: #a9b3d4; }
+
+  @media (max-width: 1100px) {
+    main { grid-template-columns: 1fr; height: auto; }
+    #left { border-right: 0; border-bottom: 1px solid var(--rule); max-height: none; }
+    .chat { max-height: 50vh; }
+  }
+  @media (max-width: 520px) {
+    header { padding: 14px 16px; } .zone { padding: 16px; }
+    .wordmark { font-size: 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <h1 class="wordmark">DejaBuy</h1>
+  <p class="tagline">A shopping assistant that asks one good question at a time, and remembers returning customers.</p>
+  <span class="spacer"></span>
+  <label class="switch"><input type="checkbox" id="memoryToggle" checked> Use what it remembers</label>
+</header>
+
+<main>
+  <section class="zone" id="left" aria-label="Customer and conversation">
+    <label class="picker"><span>Who's shopping</span>
+      <select id="customers"></select></label>
+    <p class="detail" id="customerDetail"></p>
+    <div class="actions">
+      <button class="btn" id="simulate" disabled>Watch this customer shop</button>
+      <button class="btn ghost" id="restart">Start over</button>
+    </div>
+    <div class="chat" id="chat" aria-live="polite"></div>
+    <form class="composer" id="composer">
+      <input id="input" autocomplete="off" placeholder="I'm looking for Shirts T-Shirts, but I'm still exploring." aria-label="Message">
+      <button class="btn" type="submit">Send</button>
+    </form>
+  </section>
+
+  <section class="zone" id="middle" aria-label="Shortlist">
+    <h2>Shortlist <small id="shortlistNote"></small></h2>
+    <div class="shortlist" id="shortlist">
+      <p class="empty">Pick a customer, then either watch a simulated shopper or say what you're looking for. The ten products the assistant would show appear here, best guess first.</p>
+    </div>
+  </section>
+
+  <aside class="zone" id="right" aria-label="How the assistant decided">
+    <div class="block">
+      <h2>Products that still fit</h2>
+      <div class="big" id="support">–</div>
+      <p class="soft" id="regime">Nothing said yet.</p>
+    </div>
+    <div class="block">
+      <h2>Next question <small>(expected score if asked)</small></h2>
+      <div class="bars" id="bars"><p class="soft">The assistant compares every question it could ask and picks the one that should end the search soonest.</p></div>
+    </div>
+    <div class="block">
+      <h2>What it heard</h2>
+      <div class="chips" id="slots"><p class="soft">Constraints appear here as they are understood.</p></div>
+    </div>
+    <div class="block memory off" id="memoryBox">
+      <h2>What it remembers</h2>
+      <p class="soft" id="memoryEmpty">A new customer: nothing yet.</p>
+      <dl id="memoryList" hidden></dl>
+    </div>
+    <p class="soft" id="latency"></p>
+  </aside>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let customers = [], current = null, sessionId = null, lastMemory = null, playing = false;
+
+async function api(path, body) {
+  const res = await fetch(path, body === undefined ? {} : {
+    method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const money = (p) => p == null ? "price not listed" : "$" + Number(p).toFixed(2);
+
+function renderCustomers() {
+  const sel = $("customers");
+  if (!sel.options.length) {
+    sel.innerHTML = customers.map((c, i) =>
+      `<option value="${i}">${esc(c.label)}${c.category ? `, shopping for ${esc(c.category)}` : ""}</option>`).join("");
+    sel.onchange = () => choose(customers[+sel.value]);
+  }
+  sel.value = String(customers.indexOf(current));
+  sel.classList.toggle("returning", !!current?.customer_id);
+  $("customerDetail").textContent = current ? current.detail : "";
+  $("simulate").disabled = !current || !current.customer_id || playing;
+  $("customers").disabled = playing;
+}
+
+async function choose(c) {
+  current = c; renderCustomers(); await openSession();
+}
+
+async function openSession() {
+  const out = await api("/api/session", {customer_id: current?.customer_id || null, memory: $("memoryToggle").checked});
+  sessionId = out.session_id; lastMemory = out.memory;
+  $("chat").innerHTML = ""; resetPanels(); renderMemory(out.memory);
+  if (current?.category) $("input").placeholder = `I'm looking for ${current.category}, but I'm still exploring.`;
+}
+
+function resetPanels() {
+  $("shortlist").innerHTML = `<p class="empty">Say what you're looking for, or press "Watch this customer shop".</p>`;
+  $("shortlistNote").textContent = ""; $("support").textContent = "–"; $("regime").textContent = "Nothing said yet.";
+  $("bars").innerHTML = ""; $("slots").innerHTML = ""; $("latency").textContent = "";
+}
+
+function addMsg(who, text, meta) {
+  const div = document.createElement("div");
+  div.className = `msg ${who}`;
+  div.innerHTML = esc(text) + (meta ? `<span class="meta">${esc(meta)}</span>` : "");
+  $("chat").appendChild(div); $("chat").scrollTop = $("chat").scrollHeight;
+}
+
+function renderMemory(m) {
+  const box = $("memoryBox");
+  if (!m) { box.classList.add("off"); $("memoryList").hidden = true; $("memoryEmpty").hidden = false;
+            $("memoryEmpty").textContent = current?.customer_id && !$("memoryToggle").checked
+              ? "Memory is switched off for this conversation." : "A new customer: nothing yet."; return; }
+  box.classList.remove("off"); $("memoryEmpty").hidden = true; $("memoryList").hidden = false;
+  const rows = [["Past purchases", m.purchases], ["Stores", m.stores.join(", ")], ["Departments", m.departments.join(", ")],
+                ["Usually pays", m.median_price ? "$" + m.median_price : "–"], ["Materials", m.materials.join(", ") || "–"],
+                ["Categories", m.categories.join(", ")]];
+  $("memoryList").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
+}
+
+function renderTurn(step, targetAsin) {
+  const d = step.debug || {};
+  $("support").textContent = d.support ? d.support.toLocaleString() : "–";
+  $("regime").textContent = !d.regime ? "No decision record for this turn." : d.regime === "strict"
+    ? "Every product listed here could have produced this exact conversation; the rest are ruled out."
+    : "The wording wasn't fully understood, so it ranks by how well each product matches what was said.";
+  const utils = Object.entries(d.utilities || {});
+  const max = Math.max(...utils.map(([, v]) => v), 0.0001), min = Math.min(...utils.map(([, v]) => v), 0);
+  $("bars").innerHTML = utils.length ? utils.sort((a, b) => b[1] - a[1]).map(([k, v]) => `
+    <div class="bar ${k === d.ask ? "chosen" : ""}"><span>${k.replace("_", " ")}</span>
+      <span class="track"><i style="width:${(8 + 92 * (v - min) / (max - min || 1)).toFixed(1)}%"></i></span>
+      <span class="v">${v.toFixed(3)}</span></div>`).join("")
+    : `<p class="soft">Asking about "${esc(d.ask)}" (ranking by match while the wording is unclear).</p>`;
+  $("slots").innerHTML = (d.slots || []).length ? d.slots.map((s) =>
+    `<span class="chip ${s.hard ? "hard" : ""}">${esc(s.value)}</span>`).join("") : `<p class="soft">Only the category so far.</p>`;
+  const top = Math.max(...(d.slate || []).map((s) => s.belief), 0.0001);
+  $("shortlist").innerHTML = (d.slate || []).map((s) => {
+    const remembered = s.memory != null && s.memory > 1.0;
+    return `<article class="tagcard ${remembered ? "remembered" : ""} ${s.parent_asin === targetAsin ? "target" : ""}">
+      <span class="rank">${s.rank}</span>
+      <div class="title">${esc(s.title)}</div>
+      <div class="row"><span class="store">${esc(s.store || "unknown store")}</span><span class="price">${money(s.price)}</span></div>
+      <div class="belief" title="relative likelihood"><i style="width:${(100 * s.belief / top).toFixed(0)}%"></i></div>
+      <div class="row">${remembered ? `<span class="why">Bought from this store before</span>` : "<span></span>"}
+        <button class="buy" data-asin="${s.parent_asin}">Buy</button></div>
+    </article>`; }).join("");
+  document.querySelectorAll(".buy").forEach((b) => b.onclick = () => buy(b.dataset.asin));
+  $("shortlistNote").textContent = d.deferred ? `(${d.deferred.toLocaleString()} more held back for later turns)` : "";
+  $("latency").textContent = d.latency_ms != null ? `Turn ${d.turn} decided in ${d.latency_ms} ms.` : "";
+}
+
+async function send(text) {
+  if (!sessionId) await choose(customers[0]);
+  addMsg("user", text);
+  const step = await api("/api/turn", {session_id: sessionId, message: text});
+  addMsg("agent", step.reply, `asks about: ${step.ask.replace("_", " ")}`);
+  renderTurn(step);
+}
+
+async function buy(asin) {
+  const out = await api("/api/buy", {session_id: sessionId, parent_asin: asin});
+  renderMemory(out.memory);
+  addMsg("agent", "Bought. I'll remember that next time.");
+}
+
+async function simulate() {
+  if (!current?.customer_id || playing) return;
+  playing = true; renderCustomers();
+  $("chat").innerHTML = ""; resetPanels();
+  try {
+    const run = await api("/api/simulate", {customer_id: current.customer_id, memory: $("memoryToggle").checked});
+    sessionId = run.session_id; renderMemory(run.memory);
+    for (const t of run.turns) {
+      addMsg("user", t.user);
+      if (!reduceMotion) await new Promise((r) => setTimeout(r, 450));
+      addMsg("agent", t.reply, `asks about: ${t.ask.replace("_", " ")}`);
+      renderTurn(t, run.target.parent_asin);
+      if (!reduceMotion) await new Promise((r) => setTimeout(r, 900));
+    }
+    const o = run.outcome, div = document.createElement("div");
+    div.className = "outcome" + (o.hit ? "" : " miss");
+    const memoryOn = $("memoryToggle").checked;
+    div.innerHTML = (o.hit
+      ? `Found what they wanted on turn ${o.turn}, shown at #${o.rank}: <b>${esc(run.target.title)}</b> (${esc(run.target.store)}).`
+      : `Didn't find it in 10 turns. They wanted <b>${esc(run.target.title)}</b>.`)
+      + (memoryOn ? ` <button class="buy" id="compare">Replay without memory</button>` : "");
+    $("chat").appendChild(div); $("chat").scrollTop = $("chat").scrollHeight;
+    if (memoryOn) $("compare").onclick = () => compare(o);
+  } catch (e) { addMsg("agent", "Couldn't run the simulation: " + e.message); }
+  playing = false; renderCustomers();
+}
+
+async function compare(withMemory) {
+  const run = await api("/api/simulate", {customer_id: current.customer_id, memory: false});
+  const o = run.outcome, div = document.createElement("div");
+  div.className = "outcome" + (o.hit ? "" : " miss");
+  const said = (x) => x.hit ? `turn ${x.turn}, shown at #${x.rank}` : "not found in 10 turns";
+  div.innerHTML = `Same shopper without memory: ${said(o)}. With memory: ${said(withMemory)}.`;
+  $("chat").appendChild(div); $("chat").scrollTop = $("chat").scrollHeight;
+}
+
+$("composer").onsubmit = (e) => { e.preventDefault(); const v = $("input").value.trim(); if (v) { $("input").value = ""; send(v); } };
+$("simulate").onclick = simulate;
+$("restart").onclick = () => current ? openSession() : choose(customers[0]);
+$("memoryToggle").onchange = () => current && openSession();
+
+api("/api/customers").then((list) => { customers = list; current = list[1] || list[0]; renderCustomers(); openSession(); })
+  .catch((e) => { $("customers").innerHTML = `<p class="hint">The service isn't answering (${esc(e.message)}). Start it with: python -m dejabuy.server</p>`; });
+</script>
+</body>
+</html>

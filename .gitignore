@@ -1,0 +1,27 @@
+__pycache__/
+*.pyc
+.venv*/
+.env
+/results*.json
+trace.jsonl
+# large inputs: regenerate with scripts/prepare_catalog.py, scan_sequences.py, filter_meta.py, build_dense.py
+data/catalog.jsonl
+data/Clothing_Shoes_and_Jewelry.csv.gz
+data/meta_Clothing_Shoes_and_Jewelry.jsonl.gz
+data/sequences.jsonl
+data/history_asins.txt
+data/history_meta.jsonl.gz
+data/onnx_model*/
+data/embeddings*.npz
+data/_parts/
+
+# local-only: personal notes, interview prep, resume conventions, chunked transfer helper
+CLAUDE.md
+DejaBuy_项目蓝图.md
+docs/HANDOFF.md
+docs/项目讲解.md
+scripts/join_parts.py
+.claude/
+*.log
+Thumbs.db
+.DS_Store

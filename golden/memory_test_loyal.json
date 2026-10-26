@@ -1,0 +1,98 @@
+{
+ "split": "test_loyal",
+ "n": 500,
+ "conditions": {
+  "cold": {
+   "n": 500,
+   "score": 0.976,
+   "hit": 1.0,
+   "mrr": 0.9869,
+   "mttc": 2.002,
+   "first_turn": 0.364
+  },
+  "memory": {
+   "n": 500,
+   "score": 0.9851,
+   "hit": 1.0,
+   "mrr": 0.998,
+   "mttc": 1.714,
+   "first_turn": 0.584
+  },
+  "shuffled": {
+   "n": 500,
+   "score": 0.975,
+   "hit": 1.0,
+   "mrr": 0.9841,
+   "mttc": 2.01,
+   "first_turn": 0.35
+  }
+ },
+ "strata": {
+  "cold": {
+   "same_store": {
+    "n": 500,
+    "score": 0.976,
+    "hit": 1.0,
+    "mrr": 0.9869,
+    "mttc": 2.002,
+    "first_turn": 0.364
+   }
+  },
+  "memory": {
+   "same_store": {
+    "n": 500,
+    "score": 0.9851,
+    "hit": 1.0,
+    "mrr": 0.998,
+    "mttc": 1.714,
+    "first_turn": 0.584
+   }
+  },
+  "shuffled": {
+   "same_store": {
+    "n": 500,
+    "score": 0.975,
+    "hit": 1.0,
+    "mrr": 0.9841,
+    "mttc": 2.01,
+    "first_turn": 0.35
+   }
+  }
+ },
+ "paired": {
+  "memory-cold": {
+   "rr": [
+    0.0111,
+    0.0027,
+    0.0206
+   ],
+   "turns": [
+    -0.288,
+    -0.35,
+    -0.23
+   ],
+   "session_score": [
+    0.0091,
+    0.0066,
+    0.012
+   ]
+  },
+  "memory-shuffled": {
+   "rr": [
+    0.0139,
+    0.0047,
+    0.0244
+   ],
+   "turns": [
+    -0.296,
+    -0.354,
+    -0.24
+   ],
+   "session_score": [
+    0.0101,
+    0.0075,
+    0.013
+   ]
+  }
+ }
+}
